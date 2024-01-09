@@ -1,0 +1,313 @@
+///*Задание 1 Создайте структуру Vector с тремя полями x, y и z. 
+//Для созданной структуры переопределите операторы сложения векторов, умножения векторов,
+//умножения вектора на число, а также логические операторы. Для логических операторов
+//используйте сравнение по длине от начала координат.*/
+
+//using System;
+
+//// Создаем структуру Vector
+//struct Vector
+//{
+//    // Поля структуры
+//    public double x, y, z;
+
+//    // Конструктор для инициализации полей
+//    public Vector(double x, double y, double z)
+//    {
+//        this.x = x;
+//        this.y = y;
+//        this.z = z;
+//    }
+
+//    // Переопределение оператора сложения векторов
+//    public static Vector operator +(Vector v1, Vector v2)
+//    {
+//        return new Vector(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
+//    }
+
+//    // Переопределение оператора умножения векторов
+//    public static Vector operator *(Vector v1, Vector v2)
+//    {
+//        return new Vector(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+//    }
+
+//    // Переопределение оператора умножения вектора на число
+//    public static Vector operator *(Vector v, double scalar)
+//    {
+//        return new Vector(v.x * scalar, v.y * scalar, v.z * scalar);
+//    }
+
+//    // Переопределение логического оператора равенства
+//    public static bool operator ==(Vector v1, Vector v2)
+//    {
+//        return (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
+//    }
+
+//    // Переопределение логического оператора неравенства
+//    public static bool operator !=(Vector v1, Vector v2)
+//    {
+//        return !(v1 == v2);
+//    }
+
+//    // Переопределение оператора сравнения по длине от начала координат
+//    public static bool operator >(Vector v1, Vector v2)
+//    {
+//        return (v1.Length() > v2.Length());
+//    }
+
+//    // Переопределение оператора сравнения по длине от начала координат
+//    public static bool operator <(Vector v1, Vector v2)
+//    {
+//        return (v1.Length() < v2.Length());
+//    }
+
+//    // Метод для вычисления длины вектора
+//    public double Length()
+//    {
+//        return Math.Sqrt(x * x + y * y + z * z);
+//    }
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        // Создаем векторы
+//        Vector vector1 = new Vector(9, 2, 3);
+//        Vector vector2 = new Vector(4, 5, 6);
+
+//        // Сложение векторов
+//        Vector sum = vector1 + vector2;
+//        Console.WriteLine("Сумма векторов: {0}, {1}, {2}", sum.x, sum.y, sum.z);
+
+//        // Умножение векторов
+//        Vector product = vector1 * vector2;
+//        Console.WriteLine("Произведение векторов: {0}, {1}, {2}", product.x, product.y, product.z);
+
+//        // Умножение вектора на число
+//        double scalar = 2.5;
+//        Vector scaledVector = vector1 * scalar;
+//        Console.WriteLine("Умножение вектора на число: {0}, {1}, {2}", scaledVector.x, scaledVector.y, scaledVector.z);
+
+//        // Сравнение векторов по длине от начала координат
+//        bool comparison = (vector1 > vector2);
+//        Console.WriteLine("Сравнение векторов по длине: {0}", comparison);
+
+//        // Пауза перед закрытием консоли (для просмотра результатов)
+//        Console.ReadLine();
+//    }
+//}
+
+///*Задание 2 Создайте класс Car со свойствами Name, Engine, MaxSpeed. Переопределите оператор ToString() таким образом,
+//чтобы он возвращал название машины(Name). Реализуйте возможность сравнения объектов Car,
+//реализовав интерфейс IEquatable<Car>. Создайте класс CarsCatalog, содержащий коллекцию машин – элементов
+//типа Car и переопределите для него индексатор таким образом, чтобы он возвращал строку с названием машины и типом двигателя.*/
+
+//using System;
+//using System.Collections.Generic;
+
+//// Определение класса Car
+//public class Car : IEquatable<Car>
+//{
+//    // Свойства класса Car
+//    public string Name { get; set; }
+//    public string Model { get; set; }
+//    public string Engine { get; set; }
+//    public int MaxSpeed { get; set; }
+
+//    // Конструктор класса Car
+//    public Car(string name, string model, string engine, int maxSpeed)
+//    {
+//        Name = name;
+//        Model = model;
+//        Engine = engine;
+//        MaxSpeed = maxSpeed;
+//    }
+
+//    // Переопределение метода ToString() для вывода информации о машине
+//    public override string ToString()
+//    {
+//        return $"{Name} {Model} - {Engine} двигатель, Максимальная скорость: {MaxSpeed} км/ч";
+//    }
+
+//    // Реализация интерфейса IEquatable<Car> для сравнения объектов Car
+//    public bool Equals(Car other)
+//    {
+//        if (other == null)
+//            return false;
+
+//        return Name == other.Name && Model == other.Model && Engine == other.Engine && MaxSpeed == other.MaxSpeed;
+//    }
+//}
+
+//// Определение класса CarsCatalog
+//public class CarsCatalog
+//{
+//    // Коллекция машин типа Car
+//    private List<Car> cars = new List<Car>();
+
+//    // Индексатор, возвращающий строку с информацией о машине
+//    public string this[int index]
+//    {
+//        get
+//        {
+//            if (index >= 0 && index < cars.Count)
+//            {
+//                return cars[index].ToString();
+//            }
+//            else
+//            {
+//                return "Индекс вне диапазона";
+//            }
+//        }
+//    }
+
+//    // Метод для добавления машины в каталог
+//    public void AddCar(Car car)
+//    {
+//        cars.Add(car);
+//    }
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        // Пример использования классов
+
+//        // Создание объектов Car
+//        Car car1 = new Car("Мерседес", "E-Class", "V8", 250);
+//        Car car2 = new Car("БМВ", "5 Series", "V6", 220);
+
+//        // Вывод информации о машинах в консоль с использованием переопределенного ToString()
+//        Console.WriteLine("Первая машина: " + car1);
+//        Console.WriteLine("Вторая машина: " + car2);
+
+//        // Сравнение машин с использованием IEquatable<Car>
+//        if (car1.Equals(car2))
+//            Console.WriteLine("Машины идентичны.");
+//        else
+//            Console.WriteLine("Машины различны.");
+
+//        // Создание объекта CarsCatalog
+//        CarsCatalog catalog = new CarsCatalog();
+
+//        // Добавление машин в каталог
+//        catalog.AddCar(car1);
+//        catalog.AddCar(car2);
+
+//        // Использование индексатора для вывода информации о машинах в каталоге
+//        Console.WriteLine("\nИнформация о машинах в каталоге:");
+//        Console.WriteLine("Машина по индексу 0: " + catalog[0]);
+//        Console.WriteLine("Машина по индексу 1: " + catalog[1]);
+//        Console.WriteLine("Машина по индексу 2: " + catalog[2]);
+//    }
+//}
+
+/*Задание 3 Создайте базовый класс Currency со свойством Value.
+Создайте 3 производных от Currency класса – CurrencyUSD, CurrencyEUR и CurrencyRUB со свойствами,
+соответствующими обменному курсу. В каждом из производных классов переопределите операторы преобразования
+типов таким образом, чтобы можно было явно или неявно преобразовать одну валюту в другую по курсу,
+заданному пользователем при запуске программы.*/
+
+using System;
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        Currency.ExchangeRate = GetUserExchange();
+
+        CurrencyUSD usd = new CurrencyUSD(100);
+        CurrencyEUR eur = (CurrencyEUR)usd;
+        CurrencyRUB rub = (CurrencyRUB)usd;
+
+        Console.WriteLine("Сумма в USD: " + usd.Value);
+        Console.WriteLine("Сумма в EUR: " + eur.Value);
+        Console.WriteLine("Сумма в RUB: " + rub.Value);
+    }
+
+    // Метод для получения курса обмена от пользователя
+    public static double GetUserExchange()
+    {
+        Console.WriteLine("Введите курс обмена: ");
+        double rate = double.Parse(Console.ReadLine());
+        return rate;
+    }
+}
+
+// Базовый класс Currency
+public class Currency
+{
+    public double Value { get; set; }
+    public static double ExchangeRate { get; set; }
+
+    // Конструктор базового класса
+    public Currency(double value)
+    {
+        this.Value = value;
+    }
+}
+
+// Производный класс CurrencyUSD, представляющий доллары
+public class CurrencyUSD : Currency
+{
+    public CurrencyUSD(double value) : base(value)
+    {
+    }
+
+    // Операторы преобразования из USD в другие валюты
+    public static explicit operator CurrencyEUR(CurrencyUSD usd)
+    {
+        double eurValue = usd.Value / Currency.ExchangeRate;
+        return new CurrencyEUR(eurValue);
+    }
+
+    public static explicit operator CurrencyRUB(CurrencyUSD usd)
+    {
+        double rubValue = usd.Value * Currency.ExchangeRate;
+        return new CurrencyRUB(rubValue);
+    }
+}
+
+// Производный класс CurrencyEUR, представляющий евро
+public class CurrencyEUR : Currency
+{
+    public CurrencyEUR(double value) : base(value)
+    {
+    }
+
+    // Операторы преобразования из EUR в другие валюты
+    public static explicit operator CurrencyUSD(CurrencyEUR eur)
+    {
+        double usdValue = eur.Value * Currency.ExchangeRate;
+        return new CurrencyUSD(usdValue);
+    }
+
+    public static explicit operator CurrencyRUB(CurrencyEUR eur)
+    {
+        double rubValue = eur.Value * Currency.ExchangeRate;
+        return new CurrencyRUB(rubValue);
+    }
+}
+
+// Производный класс CurrencyRUB, представляющий рубли
+public class CurrencyRUB : Currency
+{
+    public CurrencyRUB(double value) : base(value)
+    {
+    }
+
+    // Операторы преобразования из RUB в другие валюты
+    public static explicit operator CurrencyUSD(CurrencyRUB rub)
+    {
+        double usdValue = rub.Value * Currency.ExchangeRate;
+        return new CurrencyUSD(usdValue);
+    }
+
+    public static explicit operator CurrencyEUR(CurrencyRUB rub)
+    {
+        double eurValue = rub.Value * Currency.ExchangeRate;
+        return new CurrencyEUR(eurValue);
+    }
+}
